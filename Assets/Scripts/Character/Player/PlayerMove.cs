@@ -8,7 +8,6 @@ public class PlayerMove : MonoBehaviour
     public float speedRunning = 25.0f;
     public float jumpSpeed = 8.0f;
     public float gravity = 20.0f;
-    private float yaw = 0;
     private Vector3 _moveDirection = Vector3.zero;
     private float _distToGround;
 
