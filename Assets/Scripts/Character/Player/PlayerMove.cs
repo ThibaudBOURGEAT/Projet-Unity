@@ -18,8 +18,11 @@ public class PlayerMove : MonoBehaviour
         anim = gameObject.GetComponentInChildren<Animator>();
     }
     void Update()
-    {
-        float directionvertical = Input.GetAxis ("Vertical");
+    {if (!IsGrounded())
+        {
+            anim.SetInteger("AnimationJump", 0);
+        }
+            float directionvertical = Input.GetAxis ("Vertical");
         if (directionvertical > 0)
         {
             anim.SetInteger("AnimationPar", 1);
@@ -70,6 +73,7 @@ public class PlayerMove : MonoBehaviour
         if (IsGrounded())
         {
             _moveDirection.y = jumpSpeed;
+            anim.SetInteger("AnimationJump", 1);
         }
     }
 }
