@@ -8,15 +8,28 @@ public class PlayerMove : MonoBehaviour
     public float speedRunning = 25.0f;
     public float jumpSpeed = 8.0f;
     public float gravity = 20.0f;
-    private float yaw = 0;
     private Vector3 _moveDirection = Vector3.zero;
     private float _distToGround;
+    private Animator anim;
 
     void Start()
     {
         _distToGround = GetComponent<Collider>().bounds.extents.y;
+        anim = gameObject.GetComponentInChildren<Animator>();
     }
+    void Update()
+    {
+        float directionvertical = Input.GetAxis ("Vertical");
+        if (directionvertical > 0)
+        {
+            anim.SetInteger("AnimationPar", 1);
+        }
+        else
+        {
+            anim.SetInteger("AnimationPar", 0);
+        }
 
+    }
     void FixedUpdate()
     {
         if (Input.GetKey(KeyCode.LeftShift))
