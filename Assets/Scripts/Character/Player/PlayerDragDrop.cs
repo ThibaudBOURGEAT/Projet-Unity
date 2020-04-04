@@ -13,10 +13,10 @@ public class PlayerDragDrop : MonoBehaviour
 	public float distanceFromPlayer = 10f;
 	public float maxDistanceGrab = 15f;
 	public float massDivider = 2;
+	public float grabHeight = 2f;
 
 	public bool activateRayDebug = false;
 
-	private Ray playerAim;
 	private GameObject objectHeld;
 	private bool isObjectHeld;
 
@@ -49,19 +49,17 @@ public class PlayerDragDrop : MonoBehaviour
 	private void TryPickObject()
 	{
 		var cameraDirection = playerCamera.transform.forward * grabDistance;
-		playerAim = new Ray(this.transform.position, cameraDirection);
+		var playerAim = new Ray(this.transform.position + this.transform.up * grabHeight, cameraDirection);
 
 		if (activateRayDebug)
 		{
-			Debug.DrawRay(this.transform.position, cameraDirection, Color.green);
+			Debug.DrawRay(this.transform.position + this.transform.up * grabHeight, cameraDirection, Color.green);
 		}
 
-		if (Physics.Raycast(playerAim, out RaycastHit hit))
+		if (Physics.Raycast(playerAim, out RaycastHit hit, grabDistance))
 		{
 			if (!hit.collider.gameObject.CompareTag("Player") && hit.collider.gameObject.GetComponent<Rigidbody>())
 			{
-				Debug.Log(hit.collider.gameObject.name);
-
 				objectHeld = hit.collider.gameObject;
 				isObjectHeld = true;
 				objectHeld.GetComponent<Rigidbody>().useGravity = false;
@@ -72,7 +70,7 @@ public class PlayerDragDrop : MonoBehaviour
 	private void HoldObject()
 	{
 		var cameraDirection = playerCamera.transform.forward * grabDistance;
-		playerAim = new Ray(this.transform.position, cameraDirection);
+		var playerAim = new Ray(this.transform.position + this.transform.up * grabHeight, cameraDirection);
 
 		Vector3 nextPos = this.transform.position + playerAim.direction * distanceFromPlayer;
 		Vector3 currPos = objectHeld.transform.position;

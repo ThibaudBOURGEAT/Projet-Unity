@@ -2113,7 +2113,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &1774853077
 MonoBehaviour:
@@ -2145,9 +2145,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 1864724917}
   grabDistance: 10
-  distanceFromPlayer: 10
+  distanceFromPlayer: 5
   maxDistanceGrab: 15
   massDivider: 2
+  hauteurRamassage: 2
   activateRayDebug: 1
 --- !u!1 &1784531900 stripped
 GameObject:
