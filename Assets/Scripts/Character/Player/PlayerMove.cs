@@ -17,19 +17,61 @@ public class PlayerMove : MonoBehaviour
         _distToGround = GetComponent<Collider>().bounds.extents.y;
         anim = gameObject.GetComponentInChildren<Animator>();
     }
-    void Update()
+    void Update() 
     {if (!IsGrounded())
         {
             anim.SetInteger("AnimationJump", 0);
         }
             float directionvertical = Input.GetAxis ("Vertical");
-        if (directionvertical > 0)
+        if (directionvertical > 0 && Input.GetAxis ("Horizontal")==0) 
         {
             anim.SetInteger("AnimationPar", 1);
         }
         else
         {
             anim.SetInteger("AnimationPar", 0);
+       }
+
+        if (Input.GetAxis("Vertical") > 0 && Input.GetAxis("Horizontal") > 0)
+        {
+            anim.SetInteger("AnimationQ", 1);
+
+        }
+        else
+        {
+            anim.SetInteger("AnimationQ", 0);
+        }
+
+        if (Input.GetAxis("Vertical") > 0 && Input.GetAxis("Horizontal") < 0)
+        { 
+            anim.SetInteger("AnimationD", 1);
+        }
+        else
+        {
+            
+            anim.SetInteger("AnimationD", 0);
+
+        }
+
+        if (Input.GetAxis("Horizontal") > 0)
+        {
+            anim.SetInteger("AnimationQ", 1);
+
+        }
+        else
+        {
+            anim.SetInteger("AnimationQ", 0);
+        }
+
+        if (Input.GetAxis("Horizontal") < 0)
+        {
+            anim.SetInteger("AnimationD", 1);
+        }
+        else
+        {
+
+            anim.SetInteger("AnimationD", 0);
+
         }
 
     }

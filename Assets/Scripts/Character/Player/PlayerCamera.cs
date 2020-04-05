@@ -25,6 +25,8 @@ public class PlayerCamera : MonoBehaviour
         ViewObstructed();
     }
 
+
+
     void CamControl()
     {
         mouseX += Input.GetAxis("Mouse X") * mouseSpeed;
