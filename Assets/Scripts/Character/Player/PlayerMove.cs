@@ -12,13 +12,19 @@ public class PlayerMove : MonoBehaviour
     private float _distToGround;
     private Animator anim;
 
+    public EventObjectHeld eventObjectHeld;
+    private int objectHeldID;
+
     void Start()
     {
         _distToGround = GetComponent<Collider>().bounds.extents.y;
         anim = gameObject.GetComponentInChildren<Animator>();
+
+        eventObjectHeld.AddListener(ObjectHeldInfo);
     }
     void Update() 
-    {if (!IsGrounded())
+    {
+        if (!IsGrounded())
         {
             anim.SetInteger("AnimationJump", 0);
         }
@@ -94,7 +100,14 @@ public class PlayerMove : MonoBehaviour
 
     bool IsGrounded()
     {
-        return Physics.Raycast(transform.position, -Vector3.up, _distToGround);
+        bool isGrounded = Physics.Raycast(transform.position, -Vector3.up, out RaycastHit hitInfo, _distToGround);
+
+        if (objectHeldID != 0 && hitInfo.collider && hitInfo.collider.gameObject.GetInstanceID() == objectHeldID)
+        {
+            isGrounded = false;
+        }
+
+        return isGrounded;
     }
 
     public void Move(float speed)
@@ -117,5 +130,9 @@ public class PlayerMove : MonoBehaviour
             _moveDirection.y = jumpSpeed;
             anim.SetInteger("AnimationJump", 1);
         }
+    }
+    public void ObjectHeldInfo(int objectHeldID)
+    {
+        this.objectHeldID = objectHeldID;
     }
 }

@@ -11,6 +11,7 @@ public class PlayerCamera : MonoBehaviour
 
     public Transform obstruction;
     public float zommSpeed = 15f;
+    public bool disableCameraMouvement = false;
     private bool _isCollided = false;
 
     private void Start()
@@ -21,7 +22,10 @@ public class PlayerCamera : MonoBehaviour
 
     void LateUpdate()
     {
-        CamControl();
+        if (!disableCameraMouvement)
+        {
+            CamControl();
+        }
         ViewObstructed();
     }
 
