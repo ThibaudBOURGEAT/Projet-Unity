@@ -60,12 +60,12 @@ public class PlayerDragDrop : MonoBehaviour
 		if (Input.GetKeyUp(KeyCode.E) && isObjectOnRotation)
 		{
 			isObjectOnRotation = false;
-			playerCamera.gameObject.GetComponent<PlayerCamera>().disableCameraMouvement = false;
+			playerCamera.gameObject.GetComponent<CameraFollow>().disableCameraMouvement = false;
 
 			// S'il tient encore l'object cet abrutit, on remet la pression Physique du moteur
 			//if (objectHeld)
 			//{
-				//objectHeld.GetComponent<Rigidbody>().isKinematic = false;
+			//objectHeld.GetComponent<Rigidbody>().isKinematic = false;
 			//}
 		}
 	}
@@ -106,7 +106,7 @@ public class PlayerDragDrop : MonoBehaviour
 		if (Input.GetKey(KeyCode.E))
 		{
 			isObjectOnRotation = true;
-			playerCamera.gameObject.GetComponent<PlayerCamera>().disableCameraMouvement = true;
+			playerCamera.gameObject.GetComponent<CameraFollow>().disableCameraMouvement = true;
 			//objectHeld.GetComponent<Rigidbody>().isKinematic = true;
 			objectHeld.GetComponent<Rigidbody>().useGravity = false;
 			objectHeld.transform.Rotate(new Vector3(Input.GetAxis("Mouse Y"), Input.GetAxis("Mouse X"), 0) * Time.deltaTime * rotationSpeed);
