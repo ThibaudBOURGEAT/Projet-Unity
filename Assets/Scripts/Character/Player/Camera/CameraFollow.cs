@@ -7,24 +7,17 @@
 
 public class CameraFollow : MonoBehaviour
 {
-
 	public float CameraMoveSpeed = 120.0f;
 	public GameObject CameraFollowObj;
-	public float clampAngle = 80.0f;
-	public float inputSensitivity = 150.0f;
-	public GameObject CameraObj;
-	public GameObject PlayerObj;
-	public float camDistanceXToPlayer;
-	public float camDistanceYToPlayer;
-	public float camDistanceZToPlayer;
+	public float clampAngle = 90f;
 	public float mouseX;
 	public float mouseY;
-	public float finalInputX;
-	public float finalInputZ;
-	public float smoothX;
-	public float smoothY;
 
 	public bool disableCameraMouvement = false;
+
+	public float mouseSensitivity = 125f;
+	public GameObject PlayerObj;
+	float xRotation = 0f;
 
 	// Use this for initialization
 	void Start()
@@ -48,11 +41,14 @@ public class CameraFollow : MonoBehaviour
 
 	void CamControl()
 	{
-		mouseX += Input.GetAxis("Mouse X") * 5f;
-		mouseY -= Input.GetAxis("Mouse Y") * 5f;
-		mouseY = Mathf.Clamp(mouseY, -60, 60);
-		transform.rotation = Quaternion.Euler(mouseY, mouseX, 0);
-		PlayerObj.transform.rotation = Quaternion.Euler(0, mouseX, 0);
+		mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+		mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+
+		xRotation -= mouseY;
+		xRotation = Mathf.Clamp(xRotation, -clampAngle, clampAngle);
+
+		transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+		PlayerObj.transform.Rotate(Vector3.up * mouseX);
 	}
 
 	void CameraUpdater()
