@@ -1,14 +1,50 @@
 fileFormatVersion: 2
-guid: 1040dd6f330253d4f9314bb59f953ad4
+guid: 3977821b18cfaf0489986f6fb452abc9
 ModelImporter:
   serializedVersion: 19300
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      74: -5526391033858463121
+    second: Armature|1.T-Pose
+  - first:
+      74: 2327168392736209418
+    second: Armature|assis
+  - first:
+      74: 6283030589217985681
+    second: Armature|idle_01
+  - first:
+      74: 7282517563553236596
+    second: Armature|idle_02
+  - first:
+      74: 2582702461097508366
+    second: Armature|non
+  - first:
+      74: -6712718355780699345
+    second: Armature|oui
+  - first:
+      74: 5829990267277056241
+    second: Armature|saut
+  - first:
+      74: 3765771356750770650
+    second: Armature|speak_01
+  - first:
+      74: -5385293965236709008
+    second: Armature|speak_02
+  - first:
+      74: 5700833102999066515
+    second: Armature|speak_03
+  - first:
+      74: 2485276405085829358
+    second: Armature|speak_04
+  - first:
+      74: 7168293901883076996
+    second: Armature|walking
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Material
-    second: {fileID: 2100000, guid: ee5ed63694b42bf42a5441adbfa7e032, type: 2}
+    second: {fileID: 2100000, guid: f25b08cb8beccef4ea5c042a2260e809, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
@@ -85,7 +121,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.01
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
