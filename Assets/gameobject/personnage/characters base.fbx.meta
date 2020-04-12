@@ -51,7 +51,12 @@ ModelImporter:
   - first:
       74: 6057382496956065199
     second: Armature|idle_02_invert
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: No Name
+    second: {fileID: 2100000, guid: 82ab55a31b7316d42b5b96b63459e9b4, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
