@@ -8028,6 +8028,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: maison_moyenne_01
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 79594d05a5824bf4c84781b22105e8ff,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -6860895033569716450, guid: 79594d05a5824bf4c84781b22105e8ff, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 79594d05a5824bf4c84781b22105e8ff, type: 3}
