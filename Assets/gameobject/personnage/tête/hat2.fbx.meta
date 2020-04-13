@@ -1,17 +1,9 @@
 fileFormatVersion: 2
-guid: d385938e3ad5c094c86f08a54fe229ed
+guid: ef4f7b2c786c7894ab59479f911d45e1
 ModelImporter:
   serializedVersion: 19300
-  internalIDToNameTable:
-  - first:
-      74: -3215686803592127711
-    second: Cube.001|assis
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material
-    second: {fileID: 2100000, guid: f25b08cb8beccef4ea5c042a2260e809, type: 2}
+  internalIDToNameTable: []
+  externalObjects: {}
   materials:
     materialImportMode: 1
     materialName: 0
@@ -42,7 +34,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 0.02
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -88,7 +80,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 1
+    globalScale: 0.0002
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
