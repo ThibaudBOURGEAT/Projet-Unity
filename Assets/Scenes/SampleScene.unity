@@ -9783,7 +9783,7 @@ MonoBehaviour:
       m_Calls: []
   minDistance: 1
   maxDistance: 20
-  smooth: 10
+  smooth: 100
   scrollSpeed: 5
   debugLinecast: 1
 --- !u!1001 &1868511493

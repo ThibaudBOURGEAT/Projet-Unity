@@ -11,7 +11,9 @@ public class CameraCollision : MonoBehaviour
 
 	public float minDistance = 1.0f;
 	public float maxDistance = 20;
-	public float smooth = 10.0f;
+	public float offsetApplyToDistance = 0.87f;
+
+	public float smooth = 100f;
 	Vector3 dollyDir;
 
 	public float scrollSpeed = 5f;
@@ -53,12 +55,12 @@ public class CameraCollision : MonoBehaviour
 		{
 			if (!hit.collider.gameObject.CompareTag("Player"))
 			{
-				distance = Mathf.Clamp(hit.distance * 0.87f, minDistance, maxDistance);
+				distance = Mathf.Clamp(hit.distance * offsetApplyToDistance, minDistance, maxDistance);
 			}
 		}
 		else
 		{
-			distance = maxDistance;
+			distance = maxDistance * offsetApplyToDistance;
 		}
 
 		transform.localPosition = Vector3.Lerp(transform.localPosition, dollyDir * distance, Time.deltaTime * smooth);
