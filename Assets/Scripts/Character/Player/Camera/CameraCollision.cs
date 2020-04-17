@@ -10,7 +10,8 @@ public class CameraCollision : MonoBehaviour
 	public EventCameraMaxDistance eventCameraMaxDistance;
 
 	public float minDistance = 1.0f;
-	public float maxDistance = 20;
+	public float maxDistance = 20f;
+	public float cameraDistance = 20f;
 	public float offsetApplyToDistance = 0.87f;
 
 	public float smooth = 100f;
@@ -34,16 +35,16 @@ public class CameraCollision : MonoBehaviour
 	{
 		var mouseScrollWheel = Input.GetAxis("Mouse ScrollWheel");
 
-		if (mouseScrollWheel > 0f && (maxDistance > minDistance)) // backward
+		if (mouseScrollWheel > 0f && (cameraDistance > minDistance)) // backward
 		{
-			maxDistance += -mouseScrollWheel * scrollSpeed;
+			cameraDistance += -mouseScrollWheel * scrollSpeed;
 		}
-		else if (mouseScrollWheel < 0f)
+		else if (mouseScrollWheel < 0f && (cameraDistance < maxDistance))
 		{
-			maxDistance += -mouseScrollWheel * scrollSpeed;
+			cameraDistance += -mouseScrollWheel * scrollSpeed;
 		}
 
-		Vector3 desiredCameraPos = transform.parent.TransformPoint(dollyDir * maxDistance);
+		Vector3 desiredCameraPos = transform.parent.TransformPoint(dollyDir * cameraDistance);
 
 		if (debugLinecast)
 		{
@@ -59,7 +60,7 @@ public class CameraCollision : MonoBehaviour
 		}
 		else
 		{
-			distance = maxDistance * offsetApplyToDistance;
+			distance = cameraDistance * offsetApplyToDistance;
 		}
 
 		transform.localPosition = Vector3.Lerp(transform.localPosition, dollyDir * distance, Time.deltaTime * smooth);
@@ -74,6 +75,6 @@ public class CameraCollision : MonoBehaviour
 			newDistance = minDistance;
 		}
 
-		maxDistance = newDistance;
+		cameraDistance = newDistance;
 	}
 }
