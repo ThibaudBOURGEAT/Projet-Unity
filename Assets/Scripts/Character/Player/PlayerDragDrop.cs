@@ -16,7 +16,7 @@ public class PlayerDragDrop : MonoBehaviour
 	public float grabDistance = 10f;
 	public float distanceFromPlayer = 10f;
 	public float maxDistanceGrab = 15f;
-	public float massDivider = 2;
+	public float massDivider = 1f;
 	public float grabHeight = 2f;
 	public float rotationSpeed = 500f;
 
@@ -73,11 +73,11 @@ public class PlayerDragDrop : MonoBehaviour
 	private void TryPickObject()
 	{
 		var cameraDirection = playerCamera.transform.forward * grabDistance;
-		var playerAim = new Ray(this.transform.position + this.transform.up * grabHeight, cameraDirection);
+		var playerAim = new Ray(playerCamera.transform.position + playerCamera.transform.up, cameraDirection);
 
 		if (activateRayDebug)
 		{
-			Debug.DrawRay(this.transform.position + this.transform.up * grabHeight, cameraDirection, Color.green);
+			Debug.DrawRay(playerCamera.transform.position + playerCamera.transform.up, cameraDirection, Color.green);
 		}
 
 		if (Physics.Raycast(playerAim, out RaycastHit hit, grabDistance))
@@ -103,7 +103,7 @@ public class PlayerDragDrop : MonoBehaviour
 
 		Vector3 nextVelocity = (nextPos - currentPos) * (10 - (objectHeld.GetComponent<Rigidbody>().mass / massDivider));
 
-		if (Input.GetKey(KeyCode.E))
+		if (Input.GetButton("Use"))
 		{
 			isObjectOnRotation = true;
 			playerCamera.gameObject.GetComponent<CameraFollow>().disableCameraMouvement = true;
