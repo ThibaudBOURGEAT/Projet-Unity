@@ -6297,7 +6297,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1109466804}
-  m_Material: {fileID: 13400000, guid: 69d963e5ddc52074e9f757518c12c593, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
@@ -9783,6 +9783,7 @@ MonoBehaviour:
       m_Calls: []
   minDistance: 1
   maxDistance: 20
+  offsetApplyToDistance: 0.87
   smooth: 100
   scrollSpeed: 5
   debugLinecast: 1
