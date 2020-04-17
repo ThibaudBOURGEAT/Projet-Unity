@@ -30,8 +30,7 @@ public class CameraCollision : MonoBehaviour
 		eventCameraMaxDistance.AddListener(ChangeCameraMaxDistance);
 	}
 
-	// Update is called once per frame
-	void Update()
+	void LateUpdate()
 	{
 		var mouseScrollWheel = Input.GetAxis("Mouse ScrollWheel");
 
