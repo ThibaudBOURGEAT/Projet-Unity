@@ -9,18 +9,26 @@ public class CameraCollision : MonoBehaviour
 {
 	public EventCameraMaxDistance eventCameraMaxDistance;
 
-	public float minDistance = 1.0f;
-	public float maxDistance = 20f;
-	public float cameraDistance = 20f;
-	public float offsetApplyToDistance = 0.87f;
+	public float minScrollDistance = 1.0f;
+	public float maxScrollDistance = 20f;
 
 	public float smooth = 100f;
-	Vector3 dollyDir;
-
 	public float scrollSpeed = 5f;
+
+	[Tooltip("En gros, pour limiter la chance que la caméra clip un mur,\non applique un % décroissant à partir du point d'impact de la caméra")]
+	public float offsetApplyToCameraDistance = 0.87f;
 	public bool debugLinecast = false;
 
 	private float distance;
+	private float cameraDistance = 20f;
+	private Vector3 dollyDir;
+
+	/**
+	 * Distance minimal stricte.
+	 * Important si on veut que la caméra se rapproche le plus près du joueur
+	 * Si la valeur est plus haute, la caméra va aller dans le mur !
+	 */
+	private float minDistance = 1f;
 
 	// Use this for initialization
 	void Awake()
@@ -35,11 +43,11 @@ public class CameraCollision : MonoBehaviour
 	{
 		var mouseScrollWheel = Input.GetAxis("Mouse ScrollWheel");
 
-		if (mouseScrollWheel > 0f && (cameraDistance > minDistance)) // backward
+		if (mouseScrollWheel > 0f && (cameraDistance > minScrollDistance)) // backward
 		{
 			cameraDistance += -mouseScrollWheel * scrollSpeed;
 		}
-		else if (mouseScrollWheel < 0f && (cameraDistance < maxDistance))
+		else if (mouseScrollWheel < 0f && (cameraDistance < maxScrollDistance))
 		{
 			cameraDistance += -mouseScrollWheel * scrollSpeed;
 		}
@@ -55,12 +63,12 @@ public class CameraCollision : MonoBehaviour
 		{
 			if (!hit.collider.gameObject.CompareTag("Player"))
 			{
-				distance = Mathf.Clamp(hit.distance * offsetApplyToDistance, minDistance, maxDistance);
+				distance = Mathf.Clamp(hit.distance * offsetApplyToCameraDistance, minDistance, maxScrollDistance);
 			}
 		}
 		else
 		{
-			distance = cameraDistance * offsetApplyToDistance;
+			distance = cameraDistance * offsetApplyToCameraDistance;
 		}
 
 		transform.localPosition = Vector3.Lerp(transform.localPosition, dollyDir * distance, Time.deltaTime * smooth);
@@ -72,7 +80,7 @@ public class CameraCollision : MonoBehaviour
 		Debug.Log("ChangeCameraMaxDistance");
 		if (newDistance == 0)
 		{
-			newDistance = minDistance;
+			newDistance = minScrollDistance;
 		}
 
 		cameraDistance = newDistance;
