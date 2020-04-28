@@ -7,30 +7,40 @@ public class PlayerPickUp : MonoBehaviour
     public bool activateRayDebug = false;
 
     public EventCameraMaxDistance eventCameraMaxDistance;
+    public EventItemPicked eventItemPicked;
 
     public GameObject playerCamera;
     public float pickUpDistance = 10f;
-    Vector3 dollyDir;
+    public float rotationSpeed = 500f;
 
-    // Use this for initialization
-    void Awake()
-    {
-        dollyDir = transform.localPosition.normalized;
-    }
+    public GameObject objectToUse;
+
+    private bool eventInvoked = false;
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButton("Use"))
+        if (Input.GetButtonDown("Use"))
         {
-            TryLookObject();
+            if (!objectToUse)
+            {
+                TryLookObject();
+            } else
+            {
+                StopLookObject();
+            }
+        }
+
+        if (objectToUse && !eventInvoked)
+        {
+            StartLookObject();
         }
     }
 
     void TryLookObject()
     {
         var cameraDirection = playerCamera.transform.forward * pickUpDistance;
-        var playerAim = new Ray(this.transform.position + this.transform.up, cameraDirection);
+        var playerAim = new Ray(playerCamera.transform.position + playerCamera.transform.up, cameraDirection);
 
         if (activateRayDebug)
         {
@@ -41,12 +51,21 @@ public class PlayerPickUp : MonoBehaviour
         {
             if (hit.collider.gameObject.GetComponent<Interactable>())
             {
-                var objectHeld = hit.collider.gameObject;
-
-                Debug.Log(objectHeld);
-
-                eventCameraMaxDistance.Invoke(0);
+                objectToUse = hit.collider.gameObject;
             }
         }
+    }
+
+    void StartLookObject()
+    {
+        eventItemPicked.Invoke(objectToUse);
+        eventInvoked = true;
+    }
+
+    void StopLookObject()
+    {
+        objectToUse = null;
+        eventItemPicked.Invoke(objectToUse);
+        eventInvoked = false;
     }
 }

@@ -6,9 +6,6 @@ using UnityEngine.Events;
  * (Voir description de la vidéo, il y a le lien)
  */
 
-[System.Serializable]
-public class EventObjectHeld : UnityEvent<int> { }
-
 public class PlayerDragDrop : MonoBehaviour
 {
 	public GameObject playerCamera;
@@ -26,7 +23,7 @@ public class PlayerDragDrop : MonoBehaviour
 	private bool isObjectHeld;
 	private bool isObjectOnRotation;
 
-	public EventObjectHeld eventObjectHeld;
+	public EventItemPicked eventItemPicked;
 
 	void Start()
 	{
@@ -88,7 +85,7 @@ public class PlayerDragDrop : MonoBehaviour
 				isObjectHeld = true;
 				objectHeld.GetComponent<Rigidbody>().useGravity = false;
 
-				eventObjectHeld.Invoke(objectHeld.GetInstanceID());
+				eventItemPicked.Invoke(objectHeld);
 			}
 		}
 	}
@@ -129,6 +126,6 @@ public class PlayerDragDrop : MonoBehaviour
 		objectHeld.GetComponent<Rigidbody>().useGravity = true;
 		objectHeld.GetComponent<Rigidbody>().freezeRotation = false;
 		objectHeld = null;
-		eventObjectHeld.Invoke(0);
+		eventItemPicked.Invoke(null);
 	}
 }
