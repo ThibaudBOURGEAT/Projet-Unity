@@ -37,10 +37,21 @@ public class DisplayPickedItem : MonoBehaviour
     public float smooth = 100f;
     */
 
+    private float cameraDistance = 1.0f;
+
+    public float minScrollDistance = 1.0f;
+    public float maxScrollDistance = 20f;
+    public float scrollSpeed = 5f;
+
+    Vector3 pos;
+
     void Awake()
     {
         // Prevent the error "There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene."
         UICamera.gameObject.SetActive(false);
+
+        pos = new Vector3();
+
     }
 
     // Start is called before the first frame update
@@ -55,6 +66,22 @@ public class DisplayPickedItem : MonoBehaviour
         if (wannaLookItem)
         {
             itemToLook.transform.Rotate(new Vector3(Input.GetAxis("Mouse Y"), Input.GetAxis("Mouse X"), 0) * Time.deltaTime * rotationSpeed);
+        }
+
+        if (wannaLookItem && itemToLook)
+        {
+            float mouseScrollWheel = Input.GetAxis("Mouse ScrollWheel");
+
+            if (mouseScrollWheel != 0)
+            {
+                pos.z -= mouseScrollWheel * scrollSpeed * Time.deltaTime * 100f;
+                pos.x = UICamera.transform.position.x;
+                pos.y = UICamera.transform.position.y;
+
+                pos.z = Mathf.Clamp(pos.z, 1f, itemToLook.transform.position.z);
+
+                UICamera.transform.position = pos;
+            }
         }
     }
 
@@ -103,10 +130,5 @@ public class DisplayPickedItem : MonoBehaviour
 
             wannaLookItem = false;
         }
-    }
-
-    void LateUpdate()
-    {
-
     }
 }
